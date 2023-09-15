@@ -666,7 +666,10 @@ BC_STATUS crystalhd_map_dio(struct crystalhd_adp *adp, void *ubuff,
 	down_read(&current->mm->mmap_sem);
 #endif
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0)
+	res = get_user_pages(uaddr, nr_pages, rw == READ ? FOLL_WRITE : 0,
+			     dio->pages);
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,0)
 	res = get_user_pages(uaddr, nr_pages, rw == READ ? FOLL_WRITE : 0,
 			     dio->pages, NULL);
 #elif LINUX_VERSION_CODE >= KERNEL_VERSION(4,6,0)
