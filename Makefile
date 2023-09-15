@@ -38,5 +38,5 @@ install:
 
 clean:
 	rm -f *.map *.list *.o *.ko crystalhd.mod.c $(OBJ)
-	rm -f .crystalhd.mod.* .*.*.cmd
+	rm -f *crystalhd.mod* .*.*.cmd
 	rm -f Module.symvers modules.order
